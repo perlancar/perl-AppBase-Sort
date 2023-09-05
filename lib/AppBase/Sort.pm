@@ -95,7 +95,7 @@ sub sort_appbase {
     my @lines;
     while (defined(my $line = $source->())) { push @lines, $line }
 
-    my ($sort, $handle_ci_and_reverse) = $args{_sortgen}->(%args);
+    my ($sort, $handle_ci_and_reverse) = $args{_sortgen}->(\%args);
 
     if ($handle_ci_and_reverse) {
         @lines = sort { $sort->($a, $b) } @lines;
