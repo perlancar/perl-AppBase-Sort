@@ -46,8 +46,20 @@ _
     },
     modify_meta => sub {
         my $meta = shift;
+
+        $meta->{examples} = [
+            {
+                src_plang => 'bash',
+                src => 'some-cmd | sort-by-examples foo bar baz',
+                summary => 'Put "foo", "bar", "baz" lines first, in that order',
+                test => 0,
+                'x.doc.show_result' => 0,
+            },
+        ];
+
         $meta->{links} //= [];
         push @{ $meta->{links} }, {url=>'pm:Sort::ByExample'};
+        push @{ $meta->{links} }, {url=>'pm:App::sort_by_spec'};
     },
     output_code => sub {
         my %args = @_;
