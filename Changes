@@ -1,0 +1,71 @@
+0.011   2023-07-22  Released-By: PERLANCAR; Urgency: medium
+
+        - [bugfix] [dist] Forgot to add $VERSION to AppBase::Grep::File.
+
+
+0.010   2022-11-04  Released-By: PERLANCAR; Urgency: medium
+
+        - [refactor] Extract file-related code to AppBase::Grep::File.
+
+        - Support option --recursive (-r) and --dereference-recursive (-R)
+          for file source.
+
+        - [doc] Document the hidden (dev) arguments.
+
+        - [doc] Mention some related modules.
+
+
+0.009   2021-07-01  Released-By: PERLANCAR; Urgency: medium
+
+	- Observe _filter_code and _highlight_regexp arguments, to accommodate
+          grep-url.
+
+
+0.008   2021-06-09  Released-By: PERLANCAR; Urgency: medium
+
+	- Use ColorTheme.
+
+
+0.007   2020-11-07  Released-By: PERLANCAR; Urgency: medium
+
+	- Add option: --dash-prefix-inverts.
+
+
+0.006   2020-01-03  Released-By: PERLANCAR; Urgency: medium
+
+	- Accept (line, label, chomp) from source instead of just (line,
+	  label).
+
+	- [doc] Document more about COLOR_THEME.
+
+
+0.005   2018-02-26  Released-By: PERLANCAR
+
+	- Add color theme support.
+
+	- Grammar/wording.
+
+
+0.004   2018-01-30  Released-By: PERLANCAR
+
+	- No functional changes.
+
+	- [doc] Add more description.
+
+
+0.003   2018-01-29  Released-By: PERLANCAR
+
+	- Allow multiple patterns, add option --all (not in GNU grep).
+
+
+0.002   2018-01-29  Released-By: PERLANCAR
+
+	- [ux] Observe COLOR environment variable (note: this behavior is
+	  not in GNU grep).
+
+	- Display label & line number, add option --line-number (-n).
+
+
+0.001   2018-01-26  Released-By: PERLANCAR
+
+        - First release.
