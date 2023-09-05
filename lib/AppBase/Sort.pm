@@ -48,7 +48,7 @@ MARKDOWN
             tags => ['hidden'],
             description => <<'MARKDOWN',
 
-Code to produce lines of text to sort. Required.
+Code to produce *chomped* lines of text to sort. Required.
 
 Will be called with these arguments:
 
@@ -93,7 +93,7 @@ sub sort_appbase {
 
     my $source = $args{_source};
     my @lines;
-    while (defined my $line = $source->()) { push @lines, $line }
+    while (defined(my $line = $source->())) { push @lines, $line }
 
     my ($sort, $handle_ci_and_reverse) = $args{_sortgen}->(%args);
 

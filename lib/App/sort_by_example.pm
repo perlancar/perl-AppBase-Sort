@@ -1,4 +1,4 @@
-package App::abgrep;
+package App::sort_by_example;
 
 use 5.010001;
 use strict;
@@ -32,12 +32,22 @@ _
             'x.name.is_plural' => 1,
             'x.name.singular' => 'example',
             schema => ['array*', of=>'str*'],
+            req => 1,
+            pos => 0,
+            slurpy => 1,
         },
     },
-    modify_args => sub {
-        my $args = shift;
-        delete $args->{files}{pos};
-        delete $args->{files}{slurpy};
+    modify_args => {
+        files => sub {
+            my $argspec = shift;
+            delete $argspec->{pos};
+            delete $argspec->{slurpy};
+        },
+    },
+    modify_meta => sub {
+        my $meta = shift;
+        $meta->{links} //= [];
+        push @{ $meta->{links} }, {url=>'pm:Sort::ByExample'};
     },
     output_code => sub {
         my %args = @_;
@@ -47,7 +57,12 @@ _
         $args{_sortgen} = sub {
             my $args = shift;
             require Sort::ByExample;
-            my $sort = Sort::ByExample::sbe($examples);
+            my $cmp = Sort::ByExample->cmp($examples);
+            my $sort = sub {
+                my ($a, $b) = @_;
+                chomp($a); chomp($b);
+                $cmp->($a, $b);
+            };
             return ($sort);
         };
         AppBase::Sort::sort_appbase(%args);

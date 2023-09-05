@@ -1,5 +1,6 @@
 package AppBase::Sort::File;
 
+use 5.010001;
 use strict;
 use warnings;
 use Log::ger;
@@ -26,7 +27,6 @@ our %argspecs_files = (
     dereference_recursive => {
         summary => 'Read all files under each directory, recursively, following all symbolic links, unlike -r',
         schema => 'true*',
-        cmdline_aliases => {R => {}},
     },
 );
 
@@ -66,6 +66,7 @@ sub set_source_arg {
     }
 
     my ($fh, $file);
+    $fh = \*STDIN unless @files;
 
     $args->{_source} = sub {
       READ_LINE:
@@ -83,6 +84,7 @@ sub set_source_arg {
 
             my $line = <$fh>;
             if (defined $line) {
+                chomp $line;
                 return $line;
             } else {
                 undef $fh;
