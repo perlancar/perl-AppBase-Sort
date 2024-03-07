@@ -167,9 +167,25 @@ sub sort_appbase {
         my ($keygen, $is_numeric) = $args{_gen_keygen}->(\%args);
         require Sort::Key;
         if ($is_numeric) {
-            @lines = &Sort::Key::nkeysort($keygen, @lines);
+            if ($opt_reverse) {
+                @lines = &Sort::Key::rnkeysort($keygen, @lines);
+            } else {
+                @lines = &Sort::Key::nkeysort ($keygen, @lines);
+            }
         } else {
-            @lines = &Sort::Key::keysort ($keygen, @lines);
+            if ($opt_reverse) {
+                if ($opt_ci) {
+                    @lines = &Sort::Key::rkeysort(sub { lc $keygen->($_[0]) }, @lines);
+                } else {
+                    @lines = &Sort::Key::rkeysort($keygen, @lines);
+                }
+            } else {
+                if ($opt_ci) {
+                    @lines = &Sort::Key::keysort (sub { lc $keygen->($_[0]) }, @lines);
+                } else {
+                    @lines = &Sort::Key::keysort ($keygen, @lines);
+                }
+            }
         }
     } else {
         die "Either _gen_comparer, _gen_sorter, or _gen_keygen must be specified";
