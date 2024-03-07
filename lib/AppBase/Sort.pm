@@ -163,7 +163,7 @@ sub sort_appbase {
     } elsif ($args{_gen_sorter}) {
         my $sorter = $args{_gen_sorter}->(\%args);
         @lines = $sorter->(@lines);
-    } elsif ($args{_gen_sortkey}) {
+    } elsif ($args{_gen_keygen}) {
         my ($keygen, $is_numeric) = $args{_gen_keygen}->(\%args);
         require Sort::Key;
         if ($is_numeric) {
